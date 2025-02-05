@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* Gesamte Scrollleiste */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px; 
+}
+
+/* Spur (Hintergrund der Scrollleiste) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Daumen (der bewegliche Teil der Scrollleiste) */
+::-webkit-scrollbar-thumb {
+  background: #949599; 
+  border-radius: 5px;
+}
+
+/* Daumen beim Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #48494b; 
+}
+
+body {
+  background-color: #EEF0F5;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
