@@ -2,8 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import SnippetTable from "../../components/table_snippet";
 import TableBtnFilter from "../../components/ui_elements/button_filter_table";
-import ButtonCreate from "../../components/ui_elements/button_create";
-
+import PopUpShowSnippet from "../../components/pop_up_show_snippet";
 
 /**
  * !filtered language icons
@@ -28,6 +27,8 @@ const Vault_Snippets = () => {
   const [snippets, setSnippets] = useState([]);
   const [keys, setKeys] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [isOpenPopUpShowSnippet, setIsOpenPopUpShowSnippet] = useState(false);
+  const [currentSnippetData, setCurrentSnippetData] = useState();
 
   /**
    * !Fetch
@@ -47,11 +48,10 @@ const Vault_Snippets = () => {
         }
       } catch (error) {
         console.error("fetch snippets went wrong", error);
-      };
+      }
     }
     fetchSnippets();
   }, []);
-
 
   /**
    * !Functions where data get filtered
@@ -61,7 +61,7 @@ const Vault_Snippets = () => {
      * Filter keys for the columns array
      */
     return keys.filter((word) => !["code", "description"].includes(word));
-  };
+  }
   const columns = filteredKeys(keys);
 
   function filterLanguages(snippets) {
@@ -73,7 +73,7 @@ const Vault_Snippets = () => {
       new Set(snippets.map((snippet) => snippet.language))
     );
     return languages;
-  };
+  }
 
   useEffect(() => {
     if (allSnippets.length > 0) {
@@ -101,23 +101,28 @@ const Vault_Snippets = () => {
     } else {
       setSnippets(allSnippets);
     }
-  };
+  }
 
   function handleRowClick(row) {
     /**
-     * handler for the code snippet pop up
+     * Open PopUpShowSnippet
      */
-    // TODO: Logic to open the Snippet where the user can copy it
-    alert(`${row.id}`);
-  };
+    setIsOpenPopUpShowSnippet(true);
+    setCurrentSnippetData(row);
+  }
 
-  function handleCodeEditor (newCode) {
-    console.log(newCode);
+  function handleClosePopUpShowSnippet() {
+    setIsOpenPopUpShowSnippet(false);
   }
 
   return (
     <div>
-
+      {isOpenPopUpShowSnippet && (
+        <PopUpShowSnippet
+          dataObj={currentSnippetData}
+          onClick={handleClosePopUpShowSnippet}
+        />
+      )}
       <div>
         <TableBtnFilter
           buttons={buttonData}
