@@ -37,12 +37,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
 
       - name: Install Frontend Dependencies
         run: npm install
         working-directory: frontend
 
       - name: Run React Tests
-        run: npm test -- --watchAll=false
+        run: npm test --run
         working-directory: frontend
