@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import TextCodeEditor from "../components/ui_elements/code_editor";
 import { vi } from "vitest";
 
