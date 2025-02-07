@@ -8,8 +8,14 @@ const PopUpBase = ({ title = "", children = null, onClick }) => {
    */
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center" onClick={onClick}>
-      <div className="max-w-2xl max-h-[90vh] overflow-auto bg-white p-6 rounded-lg shadow-lg" onClick={(e) => e.stopPropagation()}>
+    <div
+      className="fixed inset-0 flex justify-center items-center"
+      onClick={onClick}
+    >
+      <div
+        className="max-w-2xl max-h-[90vh] overflow-auto bg-white p-6 rounded-lg shadow-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header mit Schließen-Button */}
         <div className="flex items-center justify-between mb-4">
           {title && <h2 className="text-xl font-bold">{title}</h2>}
@@ -21,9 +27,7 @@ const PopUpBase = ({ title = "", children = null, onClick }) => {
           </button>
         </div>
         {/* Inhalt mit Scroll */}
-        <div className="overflow-auto max-h-[70vh] p-2">
-          {children}
-        </div>
+        <div className="overflow-auto max-h-[70vh] p-2">{children}</div>
       </div>
     </div>
   );

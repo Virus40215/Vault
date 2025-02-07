@@ -1,7 +1,7 @@
 import React from "react";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 
-function TextCodeEditor({ language, code}) {
+function TextCodeEditor({ language, code }) {
   /**
    * Generic CodeEditor:
    */
@@ -12,10 +12,10 @@ function TextCodeEditor({ language, code}) {
       language={language}
       placeholder="Bitte Code eingeben!"
       style={{
-        backgroundColor: "#ffffff", 
-        color: "#000000", 
-        border: "1px solid #ddd", 
-        borderRadius: "10px", 
+        backgroundColor: "#ffffff",
+        color: "#000000",
+        border: "1px solid #ddd",
+        borderRadius: "10px",
         fontFamily: "monospace",
         fontSize: 14,
       }}

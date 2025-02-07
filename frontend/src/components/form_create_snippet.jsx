@@ -96,18 +96,18 @@ const CreateSnippetForm = ({ onClickClose }) => {
           />
         </div>
         <div className="flex">
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Speichern
-        </button>
-        <button
-          onClick={onClickClose}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Schließen
-        </button>
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Speichern
+          </button>
+          <button
+            onClick={onClickClose}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Schließen
+          </button>
         </div>
       </form>
     </div>
