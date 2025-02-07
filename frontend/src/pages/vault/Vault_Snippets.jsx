@@ -17,7 +17,7 @@ const languageIcons = Object.fromEntries(
       .pop()
       .replace(/\.(svg|png|jpg)$/, "");
     return [name, module.default];
-  })
+  }),
 );
 
 const Vault_Snippets = () => {
@@ -33,23 +33,23 @@ const Vault_Snippets = () => {
   /**
    * !Fetch
    */
-    async function fetchSnippets() {
-      /**
-       * Get snippet data
-       */
-      try {
-        const response = await fetch(`${API_URL}/get-all-snippets/`);
-        if (response.ok) {
-          const data = await response.json();
-          setSnippets(data.snippets);
-          setAllSnippets(data.snippets);
-          setKeys(data.keys);
-        }
-      } catch (error) {
-        console.error("fetch snippets went wrong", error);
+  async function fetchSnippets() {
+    /**
+     * Get snippet data
+     */
+    try {
+      const response = await fetch(`${API_URL}/get-all-snippets/`);
+      if (response.ok) {
+        const data = await response.json();
+        setSnippets(data.snippets);
+        setAllSnippets(data.snippets);
+        setKeys(data.keys);
       }
+    } catch (error) {
+      console.error("fetch snippets went wrong", error);
     }
-    useEffect(() => {
+  }
+  useEffect(() => {
     fetchSnippets();
   }, []);
 
@@ -74,7 +74,7 @@ const Vault_Snippets = () => {
      * Used to display filter section
      */
     const languages = Array.from(
-      new Set(snippets.map((snippet) => snippet.language))
+      new Set(snippets.map((snippet) => snippet.language)),
     );
     return languages;
   }
@@ -99,7 +99,7 @@ const Vault_Snippets = () => {
      */
     if (language) {
       const filteredSnippets = allSnippets.filter(
-        (snippet) => snippet.language === language
+        (snippet) => snippet.language === language,
       );
       setSnippets(filteredSnippets);
     } else {

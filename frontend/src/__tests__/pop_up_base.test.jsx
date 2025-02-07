@@ -7,7 +7,7 @@ describe("PopUpBase", () => {
     render(
       <PopUpBase title="Test PopUp">
         <p>Ich bin der Inhalt</p>
-      </PopUpBase>
+      </PopUpBase>,
     );
 
     expect(screen.getByText(/Test PopUp/i)).toBeInTheDocument();

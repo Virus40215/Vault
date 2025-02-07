@@ -8,7 +8,7 @@ describe("TextCodeEditor", () => {
       <TextCodeEditor
         language="javascript"
         code="console.log('Hello World');"
-      />
+      />,
     );
 
     const editor = screen.getByRole("textbox");
