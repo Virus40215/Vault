@@ -6,11 +6,12 @@ import Navbar from "./components/navbar";
 import { FaFileCirclePlus } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { PiCodeBold } from "react-icons/pi";
+
 const linkIcons = [
   <PiCodeBold size={24} />,
-  <RiScreenshot2Fill size={24}/>,
-  <FaFileCirclePlus size={24} />
-]
+  <RiScreenshot2Fill size={24} />,
+  <FaFileCirclePlus size={24} />,
+];
 const navLinks = [
   { name: "Code Snippets", path: "/" },
   { name: "Datensammlung", path: "/Vault_Data" },
@@ -18,11 +19,45 @@ const navLinks = [
 ];
 
 const App = () => {
+  /** 
+   * 
+   * 
+  const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+  const [snippets, setSnippets] = useState([]);
+
+  async function fetchSnippets() {
+
+    try {
+      const response = await fetch(`${API_URL}/get-all-snippets/`);
+      if (response.ok) {
+        const data = await response.json();
+        setSnippets(data.snippets);
+        setAllSnippets(data.snippets);
+        setKeys(data.keys);
+      }
+    } catch (error) {
+      console.error("fetch snippets went wrong", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchSnippets();
+  }, []);
+
+  const refreshSnippets = () => {
+    fetchSnippets();
+  };
+  */
+
   return (
     <div className="flex h-screen">
       <Router>
         <div className="w-64">
-          <Navbar username="Lino De Marco" navLinks={navLinks} linkIcons={linkIcons}/>
+          <Navbar
+            username="Lino De Marco"
+            navLinks={navLinks}
+            linkIcons={linkIcons}
+          />
         </div>
         <div className="flex-1 p-4 overflow-y-auto">
           <Routes>

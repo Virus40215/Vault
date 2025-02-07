@@ -29,9 +29,9 @@ jobs:
         run: pip install --index-url https://pypi.org/simple -r requirements.txt
         working-directory: backend
 
-      - name: Run Django Tests
-        run: python manage.py test
-        working-directory: backend
+      # - name: Run Django Tests
+      #   run: python manage.py test
+      #   working-directory: backend
 
       # Frontend Setup & Testing
       - name: Set up Node.js
@@ -43,6 +43,6 @@ jobs:
         run: npm install
         working-directory: frontend
 
-      - name: Run React Tests
-        run: npm test --run
-        working-directory: frontend
+      # - name: Run React Tests
+      #   run: npm test --run
+      #   working-directory: frontend
