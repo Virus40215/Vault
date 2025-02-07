@@ -33,7 +33,6 @@ const Vault_Snippets = () => {
   /**
    * !Fetch
    */
-  useEffect(() => {
     async function fetchSnippets() {
       /**
        * Get snippet data
@@ -50,8 +49,13 @@ const Vault_Snippets = () => {
         console.error("fetch snippets went wrong", error);
       }
     }
+    useEffect(() => {
     fetchSnippets();
   }, []);
+
+  function refreshSnippets() {
+    fetchSnippets();
+  }
 
   /**
    * !Functions where data get filtered
@@ -121,6 +125,7 @@ const Vault_Snippets = () => {
         <PopUpShowSnippet
           dataObj={currentSnippetData}
           onClick={handleClosePopUpShowSnippet}
+          refreshSnippets={refreshSnippets}
         />
       )}
       <div>

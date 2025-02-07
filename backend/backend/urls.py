@@ -23,4 +23,5 @@ urlpatterns = [
     path("get-snippet/", views.GetSnippet.as_view(), name="get-snippet"),
     path("get-all-snippets/", views.GetAllSnippets.as_view(), name="get-all-snippets"),
     path("create-snippet/", views.CreateSnippetView.as_view(), name="create-snippet"),
+    path('delete-item/<int:id>/', views.DeleteItemView.as_view(), name='delete-item'),
     ]

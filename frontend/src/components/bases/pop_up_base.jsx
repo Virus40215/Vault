@@ -8,20 +8,20 @@ const PopUpBase = ({ title = "", children = null, onClick }) => {
    */
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-50" onClick={onClick}>
-      <div className="bg-white p-6 rounded-lg shadow-lg" onClick={(e) => e.stopPropagation()}>
-        {/* Base */}
-        <div className="flex items-scretch justify-between mb-10">
+    <div className="fixed inset-0 flex justify-center items-center" onClick={onClick}>
+      <div className="max-w-2xl max-h-[90vh] overflow-auto bg-white p-6 rounded-lg shadow-lg" onClick={(e) => e.stopPropagation()}>
+        {/* Header mit Schließen-Button */}
+        <div className="flex items-center justify-between mb-4">
           {title && <h2 className="text-xl font-bold">{title}</h2>}
-          <button onClick={onClick}>
+          <button onClick={onClick} name="">
             <IoCloseOutline
               size={24}
               className="text-gray-500 hover:text-red-600 hover:scale-110 hover:rotate-90 transition duration-300 cursor-pointer"
             />
           </button>
         </div>
-        {/* Children */}
-        <div className="inline-flex flex-col justify-center items-center mb-4">
+        {/* Inhalt mit Scroll */}
+        <div className="overflow-auto max-h-[70vh] p-2">
           {children}
         </div>
       </div>
