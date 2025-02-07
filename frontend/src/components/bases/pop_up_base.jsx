@@ -13,7 +13,7 @@ const PopUpBase = ({ title = "", children = null, onClick }) => {
         {/* Header mit Schließen-Button */}
         <div className="flex items-center justify-between mb-4">
           {title && <h2 className="text-xl font-bold">{title}</h2>}
-          <button onClick={onClick}>
+          <button onClick={onClick} name="">
             <IoCloseOutline
               size={24}
               className="text-gray-500 hover:text-red-600 hover:scale-110 hover:rotate-90 transition duration-300 cursor-pointer"
