@@ -23,5 +23,6 @@ export const postRequest = async (bodyData) => {
   } catch (error) {
     console.error("Fehler:", error.message);
     throw error;
+    
   }
 };
