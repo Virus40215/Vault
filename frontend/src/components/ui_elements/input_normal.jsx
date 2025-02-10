@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function InputNormal({ label, name, inputValue, onInputChange}) {
+function InputNormal({ label, name, inputValue, onInputChange, type}) {
 
 
 
@@ -8,7 +8,7 @@ function InputNormal({ label, name, inputValue, onInputChange}) {
   return (
     <div class="relative z-0 w-full mb-6 group">
       <input
-        type="text"
+        type={type}
         name={name}
         id={name}
         class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-900 peer"

@@ -13,7 +13,7 @@ const FormLogin = ({ emailValue, setEmailValue , passwordValue, setPasswordValue
           Login
         </p>
         <InputNormal label="E-Mail Adresse" inputValue={emailValue} onInputChange={setEmailValue} />
-        <InputNormal label="Passwort" inputValue={passwordValue} onInputChange={setPasswordValue} />
+        <InputNormal type="password" label="Passwort" inputValue={passwordValue} onInputChange={setPasswordValue} />
       </FormBase>
     </div>
   );
