@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import backend_vault.views as views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +28,8 @@ urlpatterns = [
     path("get-all-snippets/", views.GetAllSnippets.as_view(), name="get-all-snippets"),
     path("create-snippet/", views.CreateSnippetView.as_view(), name="create-snippet"),
     path('delete-item/<int:id>/', views.DeleteItemView.as_view(), name='delete-item'),
+    path("api/user/", views.GetUserData.as_view(), name="user-data"),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     ]

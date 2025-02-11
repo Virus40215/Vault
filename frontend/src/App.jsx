@@ -9,18 +9,20 @@ import Vault_Data from "./pages/vault/Vault_Data";
 import Vault_Media from "./pages/vault/Vault_Media";
 import Login from "./pages/vault/Login";
 import Navbar from "./components/navbar";
-import ProtectedRoute from "./utils/protected_route";
-import { AuthProvider } from "./utils/auth_provider";
+import { AuthProvider } from "./utils/auth_context";
+
 import { FaFileCirclePlus } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { PiCodeBold } from "react-icons/pi";
+
+//TODO: Test the jwt tokens access and refresh
 
 const linkIcons = [
   <PiCodeBold size={24} />,
   <RiScreenshot2Fill size={24} />,
   <FaFileCirclePlus size={24} />,
 ];
-
+Vault_Snippets
 const navLinks = [
   { name: "Code Snippets", path: "/Vault_Snippets" },
   { name: "Datensammlung", path: "/Vault_Data" },
@@ -48,25 +50,25 @@ const AppLayout = () => {
           <Route
             path="/Vault_Snippets"
             element={
-              <ProtectedRoute>
+
                 <Vault_Snippets />
-              </ProtectedRoute>
+
             }
           />
           <Route
             path="/Vault_Data"
             element={
-              <ProtectedRoute>
+
                 <Vault_Data />
-              </ProtectedRoute>
+
             }
           />
           <Route
             path="/Vault_Media"
             element={
-              <ProtectedRoute>
+
                 <Vault_Media />
-              </ProtectedRoute>
+
             }
           />
         </Routes>
@@ -77,11 +79,11 @@ const AppLayout = () => {
 
 const App = () => {
   return (
-    <Router>
-      <AuthProvider>
-        <AppLayout />
-      </AuthProvider>
-    </Router>
+    <AuthProvider>
+      <Router>
+          <AppLayout />
+      </Router>
+    </AuthProvider>
   );
 };
 

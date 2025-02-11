@@ -1,36 +1,56 @@
 import { useState } from "react";
 import FormLogin from "../../components/form_login";
 import ButtonLogin from "../../components/ui_elements/button_login";
-import { postRequest } from "../../apis/post_request";
-import { useAuth } from "../../utils/auth_provider";
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
 const Login = () => {
   const [usernameValue, setUsernameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const { login } = useAuth();
+  const [error, setError] = useState("");
 
-  async function handleLogin() {
-    const loginData = {
-      username: usernameValue,
-      password: passwordValue,
-    };
+  const handleLogin = async (event) => {
+    event.preventDefault();
 
-    const response = await postRequest(loginData, "login");
-    if (response?.success) {
-      login();
+    try {
+      const response = await fetch(`${API_URL}/api/token/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: usernameValue,
+          password: passwordValue,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail);
+      }
+      const data = await response.json();
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("refresh", data.refresh);
+
+      window.location.href = "/Vault_Snippets";
+    } catch (err) {
+      setError(err.message);
+      console.log(err.message);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="flex flex-col w-100">
         <FormLogin
-          usernamelValue={usernameValue}
+          usernameValue={usernameValue}
           setUsernameValue={setUsernameValue}
           passwordValue={passwordValue}
           setPasswordValue={setPasswordValue}
         />
         <ButtonLogin buttonName="Anmelden" onBtnClick={handleLogin} />
+        {error && (
+          <p style={{ color: "red" }}>Benutzername oder Passwort falsch!</p>
+        )}
       </div>
     </div>
   );

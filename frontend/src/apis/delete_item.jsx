@@ -4,10 +4,6 @@ export const deleteItem = async (id) => {
   try {
     const response = await fetch(`${API_URL}/delete-item/${id}/`, {
       method: "DELETE",
-      headers: {
-        "X-Requested-With": "XMLHttpRequest",
-      },
-      credentials: "include",
     });
 
     if (!response.ok) {

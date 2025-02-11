@@ -136,33 +136,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
  
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://app.deine-domain.com", 
+    "https://app.deine-domain.com",
+    "http://127.0.0.1:8000",
 ]
-CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]
-
-
-CORS_ALLOW_CREDENTIALS = True 
-
-
-#Authentication
-CSRF_COOKIE_SAMESITE = "Strict"  
-CSRF_COOKIE_SECURE = True 
-#For Production True
-CSRF_COOKIE_HTTPONLY = False  
-SESSION_COOKIE_SAMESITE = "Strict" 
-SESSION_COOKIE_SECURE = True  
-#For Production True
-SESSION_COOKIE_HTTPONLY = True 
-
-
+CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
 
 
