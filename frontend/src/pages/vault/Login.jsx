@@ -28,8 +28,8 @@ const Login = () => {
         throw new Error(errorData.detail);
       }
       const data = await response.json();
-      localStorage.setItem("access", data.access);
-      localStorage.setItem("refresh", data.refresh);
+      sessionStorage.setItem("access", data.access);
+      sessionStorage.setItem("refresh", data.refresh);
 
       window.location.href = "/Vault_Snippets";
     } catch (err) {

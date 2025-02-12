@@ -26,7 +26,7 @@
 
 export const fetchWithAuth = async (url, options = {}) => {
   const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
-  let accessToken = localStorage.getItem("access");
+  let accessToken = sessionStorage.getItem("access");
 
   let response = await fetch(url, {
     ...options,
@@ -37,7 +37,7 @@ export const fetchWithAuth = async (url, options = {}) => {
   });
 
   if (response.status === 401) {
-    const refreshToken = localStorage.getItem("refresh");
+    const refreshToken = sessionStorage.getItem("refresh");
 
     const refreshResponse = await fetch(`${API_URL}/api/token/refresh/`, {
       method: "POST",
@@ -47,11 +47,11 @@ export const fetchWithAuth = async (url, options = {}) => {
 
     if (refreshResponse.ok) {
       const refreshData = await refreshResponse.json();
-      localStorage.setItem("access", refreshData.access);
+      sessionStorage.setItem("access", refreshData.access);
       return fetchWithAuth(url, options);
     } else {
-      localStorage.removeItem("access");
-      localStorage.removeItem("refresh");
+      sessionStorage.removeItem("access");
+      sessionStorage.removeItem("refresh");
       window.location.href = "/";
     }
   }
