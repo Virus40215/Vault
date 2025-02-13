@@ -2,11 +2,16 @@ import React, { useState } from "react";
 
 const TableBtnFilter = ({ buttons = [], onBtnClick }) => {
   /**
-   * This button handles an array of objects wich contains the button titles and if needed icons for the buttons
-   * Object example:
-   * [{title: "Button1", icon: icon}, {etc.}]
-   * onBtnClick returns the title of the button as an string
-   */
+ * ! This button handles an array of objects wich contains the button titles and if needed icons for the buttons
+ * ! IMPORTANT!
+ * ! This API deletes an item using the ID in the API URL. 
+ * ! If you need to use a different method, such as JSON, you will need to implement it here.
+ * 
+ * @param onBtnClick returns the title of the button as an string
+ * 
+ * ? Object example:
+ * ? [{title: "Button1", icon: icon}, {etc.}]
+ */
 
   const [active, setActive] = useState(null);
 

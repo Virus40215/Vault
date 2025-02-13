@@ -3,8 +3,9 @@ import { CiLogin } from "react-icons/ci";
 import { IoLogIn } from "react-icons/io5";
 
 const ButtonLogin = ({ buttonName = "Login", onBtnClick }) => {
-  /**
-   * Button with specific design: Login
+    /**
+   * @param buttonName: Name of the button
+   * @param onBtnClick: Add functionality
    */
 
   return (

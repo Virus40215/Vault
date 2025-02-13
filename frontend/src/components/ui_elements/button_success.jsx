@@ -3,8 +3,11 @@ import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 const ButtonSuccess = ({ buttonName = "Success", onBtnClick }) => {
   /**
-   * Button with specific design: success
+   * @param buttonName: Name of the button
+   * @param img: Image if needed
+   * @param onBtnClick: Add functionality
    */
+
 
   return (
     <div>

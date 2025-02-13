@@ -3,6 +3,11 @@ import FormLogin from "../../components/form_login";
 import ButtonLogin from "../../components/ui_elements/button_login";
 const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
+/**
+ * TODO: DOCU
+ */
+
+
 const Login = () => {
   const [usernameValue, setUsernameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");

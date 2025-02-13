@@ -2,6 +2,13 @@ import React, { createContext, useState, useEffect } from "react";
 import { fetchWithAuth } from "../apis/fetch_with_auth";
 const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
+/**
+ * TODO: DOCU
+ */
+
+
+
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {

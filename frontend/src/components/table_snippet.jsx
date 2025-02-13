@@ -5,7 +5,7 @@ function SnippetTable({ columns, data, rowClick }) {
    * Generic table with row click function:
    * Table that needs to be fed with an array of objects.
    * In addition, the column names must be handed over via a list.
-   * !column array = keywords
+   * 
    */
   return (
     <div className="">

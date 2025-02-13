@@ -2,9 +2,11 @@ import React from "react";
 import { IoAdd } from "react-icons/io5";
 
 const ButtonCreate = ({ buttonName = "Create", onBtnClick }) => {
-  /**
-   * Button with specific design: create
+      /**
+   * @param buttonName: Name of the button
+   * @param onBtnClick: Add functionality
    */
+
   return (
     <div>
       <button

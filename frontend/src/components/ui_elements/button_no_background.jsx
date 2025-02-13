@@ -2,7 +2,6 @@ import React from "react";
 
 const ButtonNoBackground = ({ buttonName, img, onBtnClick }) => {
   /**
-   * Button without a background
    * @param buttonName: Name of the button
    * @param img: Image if needed
    * @param onBtnClick: Add functionality

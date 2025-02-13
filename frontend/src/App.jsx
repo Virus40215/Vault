@@ -29,6 +29,11 @@ const navLinks = [
   { name: "Meidasammlung", path: "/Vault_Media" },
 ];
 
+/**
+ * TODO: DOCU
+ */
+
+
 const AppLayout = () => {
   const location = useLocation();
   const { loading } = useContext(AuthContext);
@@ -56,7 +61,6 @@ const AppLayout = () => {
       <div className="flex-1 p-4 overflow-y-auto">
         <Routes>
           <Route path="/" element={<Login />} />
-
           <Route element={<PrivateRoute />}>
             <Route path="/Vault_Snippets" element={<Vault_Snippets />} />
             <Route path="/Vault_Data" element={<Vault_Data />} />

@@ -7,6 +7,11 @@ import { FaFileCirclePlus } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { PiCodeBold } from "react-icons/pi";
 
+/**
+ * TODO: DOCU
+ */
+
+
 function Navbar({ username = "Guest", navLinks = [], linkIcons = [] }) {
   const [showSelectMenu, setShowSelectMenu] = useState(false);
   const [showCreateSnippetForm, setShowCreateSnippetForm] = useState(false);

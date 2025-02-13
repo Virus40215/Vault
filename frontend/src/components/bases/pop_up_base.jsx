@@ -3,8 +3,8 @@ import { IoCloseOutline } from "react-icons/io5";
 const PopUpBase = ({ title = "", children = null, onClick }) => {
   /**
    * @param title: optional title as a string
-   * @param children: all subsequent tags
-   * @param onClose: Button where you can close the pop up
+   * @param children: all the content
+   * @param onClick: Button where you can close the pop up
    */
 
   return (

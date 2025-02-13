@@ -1,10 +1,15 @@
 /**
- * ! fetchWithauth is a generic API for any API that requires tokens.
+ * ! fetchWithauth is a generic API and a util fetch for other api´s
  * ! IMPORTANT!
- * ! An API that requires a token must always be called via fetchWithAuth
+ * ! An API that requires a token must be called via fetchWithAuth
  * 
- * example of an api with token:
- * const createPost = async (title, content) => {
+ * This API checks whether a JWT token has been stored in the current session.
+ * If the response fails, it looks for a refresh token.
+ * If either token is present, the API call can proceed; otherwise, the user is redirected to the login page.
+ * 
+ * ? example of an api with token:
+ * 
+  const createPost = async (title, content) => {
   try {
     const response = await fetchWithAuth("http://example.com/api/posts/", {
       method: "POST",
