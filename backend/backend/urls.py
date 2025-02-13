@@ -31,5 +31,5 @@ urlpatterns = [
     path("api/user/", views.GetUserData.as_view(), name="user-data"),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
+    path("create-user/", views.CreateUser.as_view(), name="create-user")
     ]

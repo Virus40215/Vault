@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import FormLogin from "../../components/form_login";
 import ButtonLogin from "../../components/ui_elements/button_login";
 const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
@@ -56,6 +57,9 @@ const Login = () => {
         {error && (
           <p style={{ color: "red" }}>Benutzername oder Passwort falsch!</p>
         )}
+        <p className="mt-4 text-center">
+          Noch nicht registriert? <Link to="/register" className="text-blue-500">Hier registrieren</Link>
+        </p>
       </div>
     </div>
   );

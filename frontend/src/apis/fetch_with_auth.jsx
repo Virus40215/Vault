@@ -9,20 +9,21 @@
  * 
  * ? example of an api with token:
  * 
-  const createPost = async (title, content) => {
+  const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+  const createPost = async (exampleData1, exampleData2) => {
   try {
-    const response = await fetchWithAuth("http://example.com/api/posts/", {
+    const response = await fetchWithAuth(`${API_URL}/url/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, content }),
+      body: JSON.stringify({ exampleData1, exampleData2 }),
     });
 
-    if (!response.ok) throw new Error("Fehler beim Erstellen des Posts");
+    if (!response.ok) throw new Error("example error");
 
     const data = await response.json();
-    console.log("Post erstellt:", data);
+    console.log("example message:", data);
   } catch (error) {
     console.error("Error:", error.message);
   }

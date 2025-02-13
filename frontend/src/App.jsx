@@ -7,7 +7,8 @@ import {
 import Vault_Snippets from "./pages/vault/Vault_Snippets";
 import Vault_Data from "./pages/vault/Vault_Data";
 import Vault_Media from "./pages/vault/Vault_Media";
-import Login from "./pages/vault/Login";
+import Login from "./pages/auth/Login";
+import Registration from "./pages/auth/Registration";
 import Navbar from "./components/navbar";
 import { AuthProvider, AuthContext } from "./utils/auth_context";
 import PrivateRoute from "./utils/private_route";
@@ -30,16 +31,16 @@ const navLinks = [
 ];
 
 /**
+ *
  * TODO: DOCU
  */
-
 
 const AppLayout = () => {
   const location = useLocation();
   const { loading } = useContext(AuthContext);
-  const hideNavbar = location.pathname === "/";
-  
-
+  const hideNavbar =
+    location.pathname === "/" ||
+    location.pathname.toLowerCase() === "/register";
 
   if (loading) {
     return <p style={{ textAlign: "center", marginTop: "20px" }}>...</p>;
@@ -49,17 +50,16 @@ const AppLayout = () => {
     <div className="flex h-screen">
       {!hideNavbar && (
         <div className="w-64">
-
           <Navbar
             username="Lino De Marco"
             navLinks={navLinks}
             linkIcons={linkIcons}
           />
-
         </div>
       )}
       <div className="flex-1 p-4 overflow-y-auto">
         <Routes>
+          <Route path="/register" element={<Registration />} />
           <Route path="/" element={<Login />} />
           <Route element={<PrivateRoute />}>
             <Route path="/Vault_Snippets" element={<Vault_Snippets />} />
