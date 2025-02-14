@@ -1,8 +1,8 @@
 import React from "react";
-import { CiLogin } from "react-icons/ci";
-import { IoLogIn } from "react-icons/io5";
+import { FiUserPlus } from "react-icons/fi";
+import { FaUserPlus } from "react-icons/fa6";
 
-const ButtonLogin = ({ buttonName = "Login", onBtnClick }) => {
+const ButtonRegister = ({ buttonName = "Register", onBtnClick }) => {
     /**
    * @param buttonName: Name of the button
    * @param onBtnClick: Add functionality
@@ -15,14 +15,16 @@ const ButtonLogin = ({ buttonName = "Login", onBtnClick }) => {
         onClick={onBtnClick}
       >
         <span className="group-hover:hidden transition-all duration-300">
-          <CiLogin size={24} />
+          <FiUserPlus size={24}/> 
         </span>
         <span className="hidden group-hover:inline transition-all duration-300">
-          <IoLogIn size={24} />
+          <FaUserPlus size={24} />
         </span>
         {buttonName}
       </button>
     </div>
   );
 };
-export default ButtonLogin;
+export default ButtonRegister;
+
+

@@ -2,11 +2,17 @@ import React from "react";
 import { FaRegCopy, FaCopy } from "react-icons/fa6";
 
 const ButtonCopyToClipboard = ({ buttonName = "Copy", text, onBtnClick }) => {
-  /**
-   * Button with specific design: copy
-   * @param text: text to be copied
-   * @param onBtnCklick: regular onBtnClick
-   */
+    /**
+ * ! This button handles an array of objects wich contains the button titles and if needed icons for the buttons
+ * ! IMPORTANT!
+ * ! This API deletes an item using the ID in the API URL. 
+ * ! If you need to use a different method, such as JSON, you will need to implement it here.
+ * 
+ * @param onBtnClick Save the text into the clipboard
+ * @param text Text you wanna save
+ * @param buttonName Button name
+ * 
+ */
 
   const copyText = async () => {
     try {

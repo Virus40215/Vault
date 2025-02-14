@@ -6,6 +6,11 @@ import ButtonSuccess from "./ui_elements/button_success";
 import ButtonDelete from "./ui_elements/button_delete";
 import { deleteItem } from "../apis/delete_item";
 
+/**
+ * TODO: DOCU
+ */
+
+
 function PopUpShowSnippet({ dataObj, onClick, refreshSnippets }) {
   /**
    * Generic code showcase popup window:
@@ -18,7 +23,7 @@ function PopUpShowSnippet({ dataObj, onClick, refreshSnippets }) {
       console.log("sfwsafs");
     }
   }
-  //TODO: Add View for delete
+ 
   const handleDeleteSnippet = async (id) => {
     try {
       await deleteItem(dataObj.id);

@@ -1,8 +1,9 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import SnippetTable from "../../components/table_snippet";
 import TableBtnFilter from "../../components/ui_elements/button_filter_table";
 import PopUpShowSnippet from "../../components/pop_up_show_snippet";
+import { AuthContext } from "../../utils/auth_context";
+import { SnippetContext } from "../../utils/snippet_context";
 
 /**
  * !filtered language icons
@@ -17,73 +18,49 @@ const languageIcons = Object.fromEntries(
       .pop()
       .replace(/\.(svg|png|jpg)$/, "");
     return [name, module.default];
-  }),
+  })
 );
 
 const Vault_Snippets = () => {
-  const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+  const { user } = useContext(AuthContext);
+  const { userData, refreshSnippets } = useContext(SnippetContext);
 
-  const [allSnippets, setAllSnippets] = useState([]);
   const [snippets, setSnippets] = useState([]);
+  const [allSnippets, setAllSnippets] = useState([]);
   const [keys, setKeys] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [isOpenPopUpShowSnippet, setIsOpenPopUpShowSnippet] = useState(false);
-  const [currentSnippetData, setCurrentSnippetData] = useState();
+  const [currentSnippetData, setCurrentSnippetData] = useState(null);
 
   /**
-   * !Fetch
+   * ! Fetch & Update Snippets when userData changes
    */
-  async function fetchSnippets() {
-    /**
-     * Get snippet data
-     */
-    try {
-      const response = await fetch(`${API_URL}/get-all-snippets/`);
-      if (response.ok) {
-        const data = await response.json();
-        setSnippets(data.snippets);
-        setAllSnippets(data.snippets);
-        setKeys(data.keys);
-      }
-    } catch (error) {
-      console.error("fetch snippets went wrong", error);
-    }
-  }
   useEffect(() => {
-    fetchSnippets();
-  }, []);
-
-  function refreshSnippets() {
-    fetchSnippets();
-  }
+    if (userData && userData.snippets) {
+      setSnippets(userData.snippets);
+      setAllSnippets(userData.snippets);
+      setKeys(userData.keys || []);
+    }
+  }, [userData]);
 
   /**
-   * !Functions where data get filtered
+   * ! Filtered keys for table columns
    */
-  function filteredKeys(keys) {
-    /**
-     * Filter keys for the columns array
-     */
-    return keys.filter((word) => !["code", "description"].includes(word));
-  }
-  const columns = filteredKeys(keys);
+  const columns = keys.filter(
+    (key) => !["id", "code", "description", "user_id"].includes(key)
+  );
 
-  function filterLanguages(snippets) {
-    /**
-     * combine languages with icons
-     * Used to display filter section
-     */
-    const languages = Array.from(
-      new Set(snippets.map((snippet) => snippet.language)),
-    );
-    return languages;
-  }
-
+  /**
+   * ! Filter available languages
+   */
   useEffect(() => {
     if (allSnippets.length > 0) {
-      setLanguages(filterLanguages(allSnippets));
+      const uniqueLanguages = Array.from(
+        new Set(allSnippets.map((snippet) => snippet.language))
+      );
+      setLanguages(uniqueLanguages);
     }
-  }, [snippets]);
+  }, [allSnippets]);
 
   const buttonData = languages.map((language) => ({
     title: language,
@@ -91,15 +68,12 @@ const Vault_Snippets = () => {
   }));
 
   /**
-   * !Handlers
+   * ! Handlers
    */
   function handleTableBtnFilter(language) {
-    /**
-     * Handler for the filter section
-     */
     if (language) {
       const filteredSnippets = allSnippets.filter(
-        (snippet) => snippet.language === language,
+        (snippet) => snippet.language === language
       );
       setSnippets(filteredSnippets);
     } else {
@@ -108,9 +82,6 @@ const Vault_Snippets = () => {
   }
 
   function handleRowClick(row) {
-    /**
-     * Open PopUpShowSnippet
-     */
     setIsOpenPopUpShowSnippet(true);
     setCurrentSnippetData(row);
   }
@@ -128,17 +99,28 @@ const Vault_Snippets = () => {
           refreshSnippets={refreshSnippets}
         />
       )}
-      <div>
-        <TableBtnFilter
-          buttons={buttonData}
-          onBtnClick={handleTableBtnFilter}
-        />
-        <SnippetTable
-          columns={columns}
-          data={snippets}
-          rowClick={handleRowClick}
-        />
-      </div>
+
+      {/* ✅ Anzeige, wenn keine Snippets vorhanden sind */}
+      {snippets.length === 0 && (
+        <div className="flex justify-center items-center h-screen">
+          <h1>Noch keine Einträge vorhanden...</h1>
+        </div>
+      )}
+
+      {/* ✅ Zeige die Tabelle nur, wenn Snippets existieren */}
+      {snippets.length > 0 && (
+        <div>
+          <TableBtnFilter
+            buttons={buttonData}
+            onBtnClick={handleTableBtnFilter}
+          />
+          <SnippetTable
+            columns={columns}
+            data={snippets}
+            rowClick={handleRowClick}
+          />
+        </div>
+      )}
     </div>
   );
 };
