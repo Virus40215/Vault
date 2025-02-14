@@ -6,9 +6,6 @@ const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
  * TODO: DOCU
  */
 
-
-
-
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -17,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const accessToken = sessionStorage.getItem("access"); // Prüfe Token
+      const accessToken = sessionStorage.getItem("access");
       if (!accessToken) {
         setUser(null);
         setLoading(false);

@@ -25,7 +25,8 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("get-snippet/", views.GetSnippet.as_view(), name="get-snippet"),
-    path("get-all-snippets/", views.GetAllSnippets.as_view(), name="get-all-snippets"),
+    path("get-all-snippets/", views.GetAllSnippets.as_view(), name="get-all-snippets"), # without user_id
+    path("get-all-snippets/<int:id>/", views.GetAllSnippets.as_view(), name="get-all-snippets-id"), # with user_id
     path("create-snippet/", views.CreateSnippetView.as_view(), name="create-snippet"),
     path('delete-item/<int:id>/', views.DeleteItemView.as_view(), name='delete-item'),
     path("api/user/", views.GetUserData.as_view(), name="user-data"),

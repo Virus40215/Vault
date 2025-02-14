@@ -1,22 +1,24 @@
 //TODO: Refactor !!!
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import { AuthContext } from "../utils/auth_context";
+import { SnippetContext } from "../utils/snippet_context";
 
 /**
  * TODO: DOCU
  */
 
-
 const CreateSnippetForm = ({ onClickClose }) => {
   const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+  const { user } = useContext(AuthContext);
+  const { refreshSnippets } = useContext(SnippetContext);
 
   const [formData, setFormData] = useState({
+    user_id: user.id,
     title: "",
     language: "",
     description: "",
     code: "",
   });
-
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
@@ -26,6 +28,7 @@ const CreateSnippetForm = ({ onClickClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(formData);
       const response = await fetch(`${API_URL}/create-snippet/`, {
         method: "POST",
         headers: {
@@ -40,6 +43,7 @@ const CreateSnippetForm = ({ onClickClose }) => {
       if (data.success) {
         setMessage("Snippet wurde erfolgreich gespeichert!");
         setFormData({ title: "", language: "", description: "", code: "" });
+        refreshSnippets();
       } else {
         setMessage("Fehler: " + JSON.stringify(data.errors));
       }

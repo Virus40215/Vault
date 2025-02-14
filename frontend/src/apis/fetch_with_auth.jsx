@@ -10,7 +10,7 @@
  * ? example of an api with token:
  * 
   const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
-  const createPost = async (exampleData1, exampleData2) => {
+  export const createPost = async (exampleData1, exampleData2) => {
   try {
     const response = await fetchWithAuth(`${API_URL}/url/`, {
       method: "POST",

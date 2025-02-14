@@ -3,8 +3,8 @@ import React from "react";
 const Vault_Media = () => {
   return (
     <div>
-      <div className="flex space-x-4 p-4">
-        <div className="flex-5 mr-9">Media</div>
+      <div className="flex justify-center items-center h-screen">
+        <h1>Media</h1>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import Login from "./pages/auth/Login";
 import Registration from "./pages/auth/Registration";
 import Navbar from "./components/navbar";
 import { AuthProvider, AuthContext } from "./utils/auth_context";
+import { SnippetProvider } from "./utils/snippet_context";
 import PrivateRoute from "./utils/private_route";
 import { useContext } from "react";
 
@@ -37,7 +38,7 @@ const navLinks = [
 
 const AppLayout = () => {
   const location = useLocation();
-  const { loading } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const hideNavbar =
     location.pathname === "/" ||
     location.pathname.toLowerCase() === "/register";
@@ -51,7 +52,7 @@ const AppLayout = () => {
       {!hideNavbar && (
         <div className="w-64">
           <Navbar
-            username="Lino De Marco"
+            username={`Willkommen ${user.username}`}
             navLinks={navLinks}
             linkIcons={linkIcons}
           />
@@ -74,10 +75,12 @@ const AppLayout = () => {
 
 const App = () => {
   return (
-    <AuthProvider>
-      <Router>
-        <AppLayout />
-      </Router>
+    <AuthProvider >
+      <SnippetProvider>
+        <Router>
+          <AppLayout />
+        </Router>
+      </SnippetProvider>
     </AuthProvider>
   );
 };
