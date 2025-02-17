@@ -13,10 +13,9 @@ const PopUpBase = ({ title = "", children = null, onClick }) => {
       onClick={onClick}
     >
       <div
-        className="max-w-2xl max-h-[90vh] overflow-auto bg-white p-6 rounded-lg shadow-lg"
+        className="max-w-2xl max-h-[90vh] overflow-auto bg-white border border-gray-200 p-6 rounded-lg shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header mit Schließen-Button */}
         <div className="flex items-center justify-between mb-4">
           {title && <h2 className="text-xl font-bold">{title}</h2>}
           <button onClick={onClick} name="">

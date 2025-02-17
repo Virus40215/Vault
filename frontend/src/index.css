@@ -22,6 +22,10 @@
   background: #48494b;
 }
 
+html {
+  font-size: 13px; /* Standard: 16px */
+}
+
 body {
   background-color: #eef0f5;
   color: black;

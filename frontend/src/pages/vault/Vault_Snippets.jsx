@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useLayoutEffect } from "react";
 import SnippetTable from "../../components/table_snippet";
 import TableBtnFilter from "../../components/ui_elements/button_filter_table";
 import PopUpShowSnippet from "../../components/pop_up_show_snippet";
 import { AuthContext } from "../../utils/auth_context";
 import { SnippetContext } from "../../utils/snippet_context";
+import { SearchContext } from "../../utils/searchbar_context";
 
 /**
  * !filtered language icons
@@ -24,6 +25,7 @@ const languageIcons = Object.fromEntries(
 const Vault_Snippets = () => {
   const { user } = useContext(AuthContext);
   const { userData, refreshSnippets } = useContext(SnippetContext);
+  const { globSearchField } = useContext(SearchContext);
 
   const [snippets, setSnippets] = useState([]);
   const [allSnippets, setAllSnippets] = useState([]);
@@ -49,6 +51,19 @@ const Vault_Snippets = () => {
   const columns = keys.filter(
     (key) => !["id", "code", "description", "user_id"].includes(key)
   );
+  /**
+   * ! Filter with searchbar
+   */
+  useEffect(() => {
+    if (!globSearchField) {
+      setSnippets(allSnippets);
+    } else {
+      const filtered = allSnippets.filter((snippet) =>
+        snippet.title?.toLowerCase().includes(globSearchField.toLowerCase())
+      );
+      setSnippets(filtered);
+    }
+  }, [globSearchField, allSnippets]);
 
   /**
    * ! Filter available languages
@@ -100,14 +115,12 @@ const Vault_Snippets = () => {
         />
       )}
 
-      {/* ✅ Anzeige, wenn keine Snippets vorhanden sind */}
       {snippets.length === 0 && (
         <div className="flex justify-center items-center h-screen">
-          <h1>Noch keine Einträge vorhanden...</h1>
+          <h1>Keine Einträge gefunden...</h1>
         </div>
       )}
 
-      {/* ✅ Zeige die Tabelle nur, wenn Snippets existieren */}
       {snippets.length > 0 && (
         <div>
           <TableBtnFilter

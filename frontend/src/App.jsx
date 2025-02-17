@@ -10,8 +10,10 @@ import Vault_Media from "./pages/vault/Vault_Media";
 import Login from "./pages/auth/Login";
 import Registration from "./pages/auth/Registration";
 import Navbar from "./components/navbar";
+import Header from "./components/header";
 import { AuthProvider, AuthContext } from "./utils/auth_context";
 import { SnippetProvider } from "./utils/snippet_context";
+import { SearchProvider } from "./utils/searchbar_context";
 import PrivateRoute from "./utils/private_route";
 import { useContext } from "react";
 
@@ -24,7 +26,7 @@ const linkIcons = [
   <RiScreenshot2Fill size={24} />,
   <FaFileCirclePlus size={24} />,
 ];
-Vault_Snippets;
+
 const navLinks = [
   { name: "Code Snippets", path: "/Vault_Snippets" },
   { name: "Datensammlung", path: "/Vault_Data" },
@@ -42,15 +44,23 @@ const AppLayout = () => {
   const hideNavbar =
     location.pathname === "/" ||
     location.pathname.toLowerCase() === "/register";
+  const hideHeader =
+    location.pathname === "/" ||
+    location.pathname.toLowerCase() === "/register";
 
   if (loading) {
     return <p style={{ textAlign: "center", marginTop: "20px" }}>...</p>;
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="h-screen flex flex-col">
+      {!hideHeader && (
+        <div className="w-full h-16 fixed top-0 left-0 z-50 flex items-center px-4 bg-[#eef0f5]">
+          <Header />
+        </div>
+      )}
       {!hideNavbar && (
-        <div className="w-64">
+        <div className="h-full p-4 fixed left-0 top-16">
           <Navbar
             username={`Willkommen ${user.username}`}
             navLinks={navLinks}
@@ -58,7 +68,7 @@ const AppLayout = () => {
           />
         </div>
       )}
-      <div className="flex-1 p-4 overflow-y-auto">
+      <div className="ml-64 pt-16 h-screen overflow-y-auto p-4">
         <Routes>
           <Route path="/register" element={<Registration />} />
           <Route path="/" element={<Login />} />
@@ -75,11 +85,13 @@ const AppLayout = () => {
 
 const App = () => {
   return (
-    <AuthProvider >
+    <AuthProvider>
       <SnippetProvider>
-        <Router>
-          <AppLayout />
-        </Router>
+        <SearchProvider>
+          <Router>
+            <AppLayout />
+          </Router>
+        </SearchProvider>
       </SnippetProvider>
     </AuthProvider>
   );

@@ -2,12 +2,13 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../utils/auth_context";
 import { SnippetContext } from "../utils/snippet_context";
+import PopUpBase from "./bases/pop_up_base";
 
 /**
  * TODO: DOCU
  */
 
-const CreateSnippetForm = ({ onClickClose }) => {
+const CreateSnippetForm = ({ onClick, onClickClose }) => {
   const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
   const { user } = useContext(AuthContext);
   const { refreshSnippets } = useContext(SnippetContext);
@@ -53,6 +54,7 @@ const CreateSnippetForm = ({ onClickClose }) => {
   };
 
   return (
+
     <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">Neues Snippet erstellen</h2>
 
