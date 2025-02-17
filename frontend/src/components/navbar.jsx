@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import ButtonCreate from "./ui_elements/button_create";
 import ButtonNoBackground from "./ui_elements/button_no_background";
-import CreateSnippetForm from "./form_create_snippet";
+import CreateSnippetForm from "./pop_up_create_snippet";
 import { FaFileCirclePlus } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { PiCodeBold } from "react-icons/pi";
@@ -49,20 +49,17 @@ function Navbar({ username = "Guest", navLinks = [], linkIcons = [] }) {
     };
   }, [showSelectMenu]);
 
-  /**
-   * !Create snippet form
-   */
+  function handleClosePopUpCreateSnippet() {
+    setShowCreateSnippetForm(false);
+  }
 
   return (
     <div>
       {showCreateSnippetForm && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
-          <CreateSnippetForm
-            onClickClose={() => {
-              setShowCreateSnippetForm(false);
-            }}
+          <CreateSnippetForm className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            onClickClose={
+              handleClosePopUpCreateSnippet}
           />
-        </div>
       )}
 
       <nav className="mt-6 p-4 text-left">

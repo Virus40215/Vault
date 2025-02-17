@@ -3,12 +3,14 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../utils/auth_context";
 import { SnippetContext } from "../utils/snippet_context";
 import PopUpBase from "./bases/pop_up_base";
+import InputNormal from "./ui_elements/input_normal";
+import ButtonCreate from "./ui_elements/button_create";
 
 /**
  * TODO: DOCU
  */
 
-const CreateSnippetForm = ({ onClick, onClickClose }) => {
+const CreateSnippetForm = ({ onClickClose }) => {
   const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
   const { user } = useContext(AuthContext);
   const { refreshSnippets } = useContext(SnippetContext);
@@ -22,14 +24,9 @@ const CreateSnippetForm = ({ onClick, onClickClose }) => {
   });
   const [message, setMessage] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData);
       const response = await fetch(`${API_URL}/create-snippet/`, {
         method: "POST",
         headers: {
@@ -45,6 +42,7 @@ const CreateSnippetForm = ({ onClick, onClickClose }) => {
         setMessage("Snippet wurde erfolgreich gespeichert!");
         setFormData({ title: "", language: "", description: "", code: "" });
         refreshSnippets();
+        onClickClose();
       } else {
         setMessage("Fehler: " + JSON.stringify(data.errors));
       }
@@ -54,7 +52,49 @@ const CreateSnippetForm = ({ onClick, onClickClose }) => {
   };
 
   return (
+    <PopUpBase title="Snippet erstellen" onClick={onClickClose}>
+      {message && <p className="mb-4 text-center">{message}</p>}
 
+      <form onSubmit={handleSubmit} className="w-150 space-y-4">
+        <InputNormal
+          label="Titel"
+          name="title"
+          inputValue={formData.title}
+          onInputChange={(value) => setFormData({ ...formData, title: value })}
+        />
+        <InputNormal
+          label="Sprache"
+          name="language"
+          inputValue={formData.language}
+          onInputChange={(value) =>
+            setFormData({ ...formData, language: value })
+          }
+        />
+        <InputNormal
+          label="Beschreibung"
+          name="description"
+          inputValue={formData.description}
+          onInputChange={(value) =>
+            setFormData({ ...formData, description: value })
+          }
+        />
+        <InputNormal
+          label="Code"
+          name="code"
+          inputValue={formData.code}
+          onInputChange={(value) => setFormData({ ...formData, code: value })}
+        />
+        <div className="flex">
+          <button
+            className="group flex items-center gap-2 px-4 py-2 rounded-full text-white bg-gradient-to-r from-[#0F6CBD] to-blue-900 hover:brightness-75 transition-all duration-300"
+            type="submit"
+          >
+            Speichern
+          </button>
+        </div>
+      </form>
+    </PopUpBase>
+    /*
     <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">Neues Snippet erstellen</h2>
 
@@ -114,15 +154,9 @@ const CreateSnippetForm = ({ onClick, onClickClose }) => {
           >
             Speichern
           </button>
-          <button
-            onClick={onClickClose}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Schließen
-          </button>
         </div>
       </form>
-    </div>
+    </div>*/
   );
 };
 

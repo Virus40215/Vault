@@ -31,11 +31,11 @@ const ButtonCopyToClipboard = ({ buttonName = "Copy", text, onBtnClick }) => {
         }}
       >
         <FaCopy
-          size={24}
+          size={20}
           className="group-hover:hidden transition-all duration-300"
         />
         <FaRegCopy
-          size={24}
+          size={20}
           className="hidden group-hover:inline transition-all duration-300"
         />
         {buttonName}
