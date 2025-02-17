@@ -69,7 +69,7 @@ function Navbar({ username = "Guest", navLinks = [], linkIcons = [] }) {
         <div className="mb-7">
           <div className="relative inline-block">
             <ButtonCreate
-              buttonName="Erstellen/Hochladen"
+              buttonName="Erstellen oder hochladen"
               onBtnClick={handleButtonCreate}
             />
             {showSelectMenu && (
