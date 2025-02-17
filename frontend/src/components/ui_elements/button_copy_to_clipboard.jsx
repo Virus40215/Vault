@@ -2,17 +2,17 @@ import React from "react";
 import { FaRegCopy, FaCopy } from "react-icons/fa6";
 
 const ButtonCopyToClipboard = ({ buttonName = "Copy", text, onBtnClick }) => {
-    /**
- * ! This button handles an array of objects wich contains the button titles and if needed icons for the buttons
- * ! IMPORTANT!
- * ! This API deletes an item using the ID in the API URL. 
- * ! If you need to use a different method, such as JSON, you will need to implement it here.
- * 
- * @param onBtnClick Save the text into the clipboard
- * @param text Text you wanna save
- * @param buttonName Button name
- * 
- */
+  /**
+   * ! This button handles an array of objects wich contains the button titles and if needed icons for the buttons
+   * ! IMPORTANT!
+   * ! This API deletes an item using the ID in the API URL.
+   * ! If you need to use a different method, such as JSON, you will need to implement it here.
+   *
+   * @param onBtnClick Save the text into the clipboard
+   * @param text Text you wanna save
+   * @param buttonName Button name
+   *
+   */
 
   const copyText = async () => {
     try {
@@ -30,11 +30,11 @@ const ButtonCopyToClipboard = ({ buttonName = "Copy", text, onBtnClick }) => {
           copyText(), onBtnClick();
         }}
       >
-        <FaCopy
+        <FaRegCopy
           size={20}
           className="group-hover:hidden transition-all duration-300"
         />
-        <FaRegCopy
+        <FaCopy
           size={20}
           className="hidden group-hover:inline transition-all duration-300"
         />

@@ -9,15 +9,11 @@ function SnippetTable({ columns, data, rowClick }) {
    */
   return (
     <div className="">
-      <table className="min-w-full shadow-lg rounded-lg overflow-hidden">
-        <thead className="bg-white text-gray-700 uppercase text-sm border-b border-gray-200">
-          <tr>
-            {columns.map((column) => (
-              <th key={column} className="px-6 py-3 text-left">
-                {column}
-              </th>
-            ))}
-          </tr>
+      <table className="min-w-full shadow-lg rounded-2xl overflow-hidden border border-gray-500">
+        <thead className="bg-white text-gray-700 uppercase text-sm border-b border-gray-300">
+          <th className="px-6 py-3 text-left">Titel</th>
+          <th className="px-6 py-3 text-left">Sprache</th>
+          <th className="px-6 py-3 text-left">Erstellt am</th>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
           {data.map((row, rowIndex) => (

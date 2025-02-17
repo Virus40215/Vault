@@ -1,8 +1,8 @@
 import React from "react";
 import { MdDeleteOutline, MdDeleteForever } from "react-icons/md";
 
-const ButtonDelete = ({ buttonName = "Delete", onBtnClick }) => {
-      /**
+const ButtonDelete = ({ buttonName = "", onBtnClick }) => {
+  /**
    * @param buttonName: Name of the button
    * @param onBtnClick: Add functionality
    */

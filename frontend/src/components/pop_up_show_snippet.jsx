@@ -5,6 +5,7 @@ import ButtonCopyToClipboard from "./ui_elements/button_copy_to_clipboard";
 import ButtonSuccess from "./ui_elements/button_success";
 import ButtonDelete from "./ui_elements/button_delete";
 import { deleteItem } from "../apis/delete_item";
+import TextAreaNormal from "./ui_elements/textarea_normal";
 
 /**
  * TODO: DOCU
@@ -37,21 +38,12 @@ function PopUpShowSnippet({ dataObj, onClick, refreshSnippets }) {
   return (
     <PopUpBase title={dataObj.title} onClick={onClick}>
       <div>
+
+          <TextAreaNormal label="Sprache" inputValue={dataObj.language}/>
+          <TextAreaNormal label="Beschreibung" inputValue={dataObj.description}/>
+
         <div>
-          <h1 className="font-bold mb-2">Beschreibung:</h1>
-          <p className="text-lg leading-relaxed max-w-2xl">
-            {dataObj.language}
-          </p>
-        </div>
-        <div>
-          <h1 className="font-bold mb-2">Beschreibung:</h1>
-          <p className="text-lg leading-relaxed max-w-2xl">
-            {dataObj.description}
-          </p>
-        </div>
-        <div>
-          <h1 className="font-bold mb-2">Code:</h1>
-          <TextCodeEditor language={dataObj.language} code={dataObj.code} />
+          <TextCodeEditor language={dataObj.language} code={dataObj.code} label="Code" />
         </div>
         <div className="flex justify-between gap-50 mt-4">
           {copySuccess ? (
@@ -63,7 +55,7 @@ function PopUpShowSnippet({ dataObj, onClick, refreshSnippets }) {
               onBtnClick={handleCopySuccess}
             />
           )}
-          <ButtonDelete buttonName="Löschen" onBtnClick={handleDeleteSnippet} />
+          <ButtonDelete buttonName="" onBtnClick={handleDeleteSnippet} />
         </div>
       </div>
     </PopUpBase>

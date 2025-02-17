@@ -47,6 +47,9 @@ const AppLayout = () => {
   const hideHeader =
     location.pathname === "/" ||
     location.pathname.toLowerCase() === "/register";
+  const containerClass = hideNavbar
+    ? "fixed w-full h-screen p-4"
+    : "ml-80 mr-5 pt-16 h-screen p-4";
 
   if (loading) {
     return <p style={{ textAlign: "center", marginTop: "20px" }}>...</p>;
@@ -59,25 +62,28 @@ const AppLayout = () => {
           <Header />
         </div>
       )}
-      {!hideNavbar && (
-        <div className="h-full p-4 fixed left-0 top-16">
-          <Navbar
-            username={`Willkommen ${user.username}`}
-            navLinks={navLinks}
-            linkIcons={linkIcons}
-          />
+      ^
+      <div>
+        {!hideNavbar && (
+          <div className="flex-1/2 h-full 0p-4 fixed left-0 top-16">
+            <Navbar
+              username={`Willkommen ${user.username}`}
+              navLinks={navLinks}
+              linkIcons={linkIcons}
+            />
+          </div>
+        )}
+        <div className={containerClass}>
+          <Routes>
+            <Route path="/register" element={<Registration />} />
+            <Route path="/" element={<Login />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/Vault_Snippets" element={<Vault_Snippets />} />
+              <Route path="/Vault_Data" element={<Vault_Data />} />
+              <Route path="/Vault_Media" element={<Vault_Media />} />
+            </Route>
+          </Routes>
         </div>
-      )}
-      <div className="ml-64 pt-16 h-screen overflow-y-auto p-4">
-        <Routes>
-          <Route path="/register" element={<Registration />} />
-          <Route path="/" element={<Login />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/Vault_Snippets" element={<Vault_Snippets />} />
-            <Route path="/Vault_Data" element={<Vault_Data />} />
-            <Route path="/Vault_Media" element={<Vault_Media />} />
-          </Route>
-        </Routes>
       </div>
     </div>
   );

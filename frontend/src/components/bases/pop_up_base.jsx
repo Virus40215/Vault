@@ -9,7 +9,7 @@ const PopUpBase = ({ title = "", children = null, onClick }) => {
       onClick={onClick}
     >
       <div
-        className=" max-w-3xl bg-white border border-gray-200 p-6 rounded-lg shadow-lg"
+        className=" max-w-3xl bg-white border border-gray-300 p-6 rounded-2xl shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
